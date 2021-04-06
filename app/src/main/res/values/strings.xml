@@ -8,7 +8,6 @@
     <string name="title_home">Home</string>
     <string name="title_info">Search</string>
     <string name="title_favorite">favorite</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="search">Search Movie</string>
     <string name="search_hint">Find movies, genre and others</string>
 </resources>

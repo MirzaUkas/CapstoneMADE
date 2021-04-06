@@ -15,10 +15,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
-
     private val viewModel: DetailViewModel by viewModel()
 
     private var _binding: DetailFragmentBinding? = null

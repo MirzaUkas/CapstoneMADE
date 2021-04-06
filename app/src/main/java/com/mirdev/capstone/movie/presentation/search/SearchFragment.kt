@@ -84,7 +84,7 @@ class SearchFragment : Fragment() {
     }
 
 
-    fun SearchView.getQueryTextChangeStateFlow(): StateFlow<String> {
+    private fun SearchView.getQueryTextChangeStateFlow(): StateFlow<String> {
 
         val query = MutableStateFlow("")
 

@@ -16,7 +16,7 @@ class MovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listData = ArrayList<Movie>()
     var onItemClick: ((Movie) -> Unit)? = null
-    var isLinearItem = true
+    private var isLinearItem = true
 
     fun setData(isLinear: Boolean, newListData: List<Movie>?) {
         isLinearItem = isLinear

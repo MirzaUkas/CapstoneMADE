@@ -31,9 +31,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+//        checkReleaseBuilds false
+//        disable "UnsafeExperimentalUsageError",
+//                "ObsoleteLintCustomCheck",
+//                "UnsafeExperimentalUsageWarning"
+    }
     buildFeatures {
         viewBinding = true
     }
+
     dynamicFeatures = [':favorite']
 }
 
@@ -41,7 +48,6 @@ dependencies {
     implementation project(":core")
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "com.google.android.play:core:1.10.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
