@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_favorite"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/favoriteFragment">
@@ -8,16 +9,17 @@
         android:name="com.mirdev.capstone.favorite.presentation.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite">
+
         <action
-            android:id="@+id/action_favoriteFragment_to_detailFragment3"
-            app:destination="@id/detailFragment3" />
+            android:id="@+id/action_favoriteFragment_to_detailFragment2"
+            app:destination="@id/nav_detail">
+            <argument
+                android:name="movie_data"
+                app:argType="com.mirdev.capstone.core.domain.model.Movie" />
+        </action>
+
     </fragment>
-    <fragment
-        android:id="@+id/detailFragment3"
-        android:name="com.mirdev.capstone.movie.presentation.detail.DetailFragment"
-        android:label="DetailFragment">
-        <argument
-            android:name="movie_data"
-            app:argType="com.mirdev.capstone.core.domain.model.Movie" />
-    </fragment>
+
+    <include app:graph="@navigation/nav_detail" />
+
 </navigation>

@@ -33,7 +33,7 @@ class FavoriteFragment : Fragment() {
         val movieAdapter = MovieAdapter()
         movieAdapter.onItemClick = { selectedData ->
             view.findNavController().navigate(
-                FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment3(selectedData)
+                FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment2(selectedData)
             )
         }
 

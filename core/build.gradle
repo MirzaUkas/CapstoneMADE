@@ -25,12 +25,14 @@ android {
             buildConfigField "String", 'BASE_URL', "\"https://api.themoviedb.org\""
             buildConfigField "String", 'IMG_URL', "\"https://image.tmdb.org/t/p/w500\""
             buildConfigField "String", 'API_KEY', "\"9f3468a4387e161c074e86e7ed72428d\""
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             buildConfigField "String", 'BASE_URL', "\"https://api.themoviedb.org\""
             buildConfigField "String", 'IMG_URL', "\"https://image.tmdb.org/t/p/w500\""
             buildConfigField "String", 'API_KEY', "\"9f3468a4387e161c074e86e7ed72428d\""
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -56,7 +58,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
-
+    implementation "net.zetetic:android-database-sqlcipher:$sql_cipher"
+    implementation "androidx.sqlite:sqlite-ktx:$sqlite_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

@@ -37,6 +37,7 @@ class DetailFragment : Fragment() {
     private fun showDetailMovie(detailMovie: Movie?) {
         detailMovie?.let {
             binding.tvOverview.text = detailMovie.overview
+            binding.tvMatchPercentage.text = "${rand(0, 100)}% Match"
             binding.tvReleaseDate.text = detailMovie.releaseDate
             binding.tvMediaType.text = detailMovie.voteAverage.toString()
             Glide.with(requireContext())
@@ -54,6 +55,11 @@ class DetailFragment : Fragment() {
                 setStatusFavorite(statusFavorite)
             }
         }
+    }
+
+    private fun rand(start: Int, end: Int): Int {
+        require(start <= end) { "Illegal Argument" }
+        return (Math.random() * (end - start + 1)).toInt() + start
     }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
