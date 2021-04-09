@@ -10,4 +10,5 @@
     <string name="title_favorite">favorite</string>
     <string name="search">Search Movie</string>
     <string name="search_hint">Find movies, genre and others</string>
+    <string name="match_percentage">%1$d %% Match</string>
 </resources>

@@ -38,10 +38,12 @@ class FavoriteFragment : Fragment() {
         }
 
         favoriteViewModel.favoriteMovie.observe(viewLifecycleOwner, { movie ->
+            binding.progressBar.visibility = View.GONE
+
             if (movie != null && movie.isNotEmpty()) {
                 movieAdapter.setData(true, movie)
+                binding.viewErrorFavorite.root.visibility = View.GONE
             } else {
-                binding.progressBar.visibility = View.GONE
                 binding.viewErrorFavorite.root.visibility = View.VISIBLE
                 binding.viewErrorFavorite.tvError.text =
                     getString(com.mirdev.capstone.core.R.string.no_data)
@@ -53,5 +55,10 @@ class FavoriteFragment : Fragment() {
             setHasFixedSize(true)
             adapter = movieAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

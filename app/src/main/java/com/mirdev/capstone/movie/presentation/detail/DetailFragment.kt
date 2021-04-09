@@ -19,7 +19,7 @@ class DetailFragment : Fragment() {
 
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private var isFavorite: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,24 +35,31 @@ class DetailFragment : Fragment() {
     }
 
     private fun showDetailMovie(detailMovie: Movie?) {
-        detailMovie?.let {
-            binding.tvOverview.text = detailMovie.overview
-            binding.tvMatchPercentage.text = "${rand(0, 100)}% Match"
-            binding.tvReleaseDate.text = detailMovie.releaseDate
-            binding.tvMediaType.text = detailMovie.voteAverage.toString()
+
+        detailMovie?.let { data ->
+            binding.tvOverview.text = data.overview
+            binding.tvMatchPercentage.text = getString(R.string.match_percentage, rand(0, 100))
+            binding.tvReleaseDate.text = data.releaseDate
+            binding.tvMediaType.text = data.voteAverage.toString()
             Glide.with(requireContext())
-                .load(IMG_URL + detailMovie.imagePoster)
+                .load(IMG_URL + data.imagePoster)
                 .into(binding.ivPoster)
             Glide.with(requireContext())
-                .load(IMG_URL + detailMovie.imageBackdrop)
+                .load(IMG_URL + data.imageBackdrop)
                 .into(binding.ivBackdrop)
+            viewModel.favoriteMovie.observe(viewLifecycleOwner, { movie ->
+                if (movie != null && movie.isNotEmpty()) {
+                    isFavorite = movie.any { fav -> fav.movieId == data.movieId }
+                    setStatusFavorite(isFavorite)
+                } else {
+                    setStatusFavorite(false)
+                }
+            })
 
-            var statusFavorite = detailMovie.isFavorite
-            setStatusFavorite(statusFavorite)
             binding.tvFavorite.setOnClickListener {
-                statusFavorite = !statusFavorite
-                viewModel.setFavoriteMovie(detailMovie, statusFavorite)
-                setStatusFavorite(statusFavorite)
+                isFavorite = !isFavorite
+                viewModel.setFavoriteMovie(data, isFavorite)
+                setStatusFavorite(isFavorite)
             }
         }
     }
