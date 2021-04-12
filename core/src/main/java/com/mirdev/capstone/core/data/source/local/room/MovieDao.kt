@@ -13,6 +13,9 @@ interface MovieDao {
     @Query("SELECT * FROM movie where isFavorite = 1")
     fun getFavoriteMovie(): Flow<List<MovieEntity>>
 
+    @Query("SELECT * FROM movie where title LIKE '%' || :query || '%'")
+    fun getMovieByQuery(query: String?): Flow<List<MovieEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movie: List<MovieEntity>)
 

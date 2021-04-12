@@ -41,20 +41,13 @@ class DetailFragment : Fragment() {
             binding.tvMatchPercentage.text = getString(R.string.match_percentage, rand(0, 100))
             binding.tvReleaseDate.text = data.releaseDate
             binding.tvMediaType.text = data.voteAverage.toString()
+            isFavorite = data.isFavorite
             Glide.with(requireContext())
                 .load(IMG_URL + data.imagePoster)
                 .into(binding.ivPoster)
             Glide.with(requireContext())
                 .load(IMG_URL + data.imageBackdrop)
                 .into(binding.ivBackdrop)
-            viewModel.favoriteMovie.observe(viewLifecycleOwner, { movie ->
-                if (movie != null && movie.isNotEmpty()) {
-                    isFavorite = movie.any { fav -> fav.movieId == data.movieId }
-                    setStatusFavorite(isFavorite)
-                } else {
-                    setStatusFavorite(false)
-                }
-            })
 
             binding.tvFavorite.setOnClickListener {
                 isFavorite = !isFavorite

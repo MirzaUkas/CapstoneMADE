@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mirdev.capstone.core.data.Resource
 import com.mirdev.capstone.core.ui.MovieAdapter
 import com.mirdev.capstone.movie.R
 import com.mirdev.capstone.movie.databinding.SearchFragmentBinding
@@ -65,18 +64,15 @@ class SearchFragment : Fragment() {
             }.asLiveData()
 
         result.observe(viewLifecycleOwner, {
-            when (it) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    movieAdapter.setData(true, it.data)
-                }
-                is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.viewErrorSearch.root.visibility = View.VISIBLE
-                    binding.viewErrorSearch.tvError.text =
-                        it.message ?: getString(R.string.something_wrong)
-                }
+            if (it.isNotEmpty()) {
+                binding.rvMovie.visibility = View.VISIBLE
+                binding.viewErrorSearch.root.visibility = View.GONE
+                movieAdapter.setData(true, it)
+            } else {
+                binding.progressBar.visibility = View.GONE
+                binding.rvMovie.visibility = View.GONE
+                binding.viewErrorSearch.root.visibility = View.VISIBLE
+                binding.viewErrorSearch.tvError.text = getString(R.string.no_data)
             }
         })
 
