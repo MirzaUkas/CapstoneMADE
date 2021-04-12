@@ -42,6 +42,7 @@ class DetailFragment : Fragment() {
             binding.tvReleaseDate.text = data.releaseDate
             binding.tvMediaType.text = data.voteAverage.toString()
             isFavorite = data.isFavorite
+            setStatusFavorite(isFavorite)
             Glide.with(requireContext())
                 .load(IMG_URL + data.imagePoster)
                 .into(binding.ivPoster)
